@@ -1,0 +1,41 @@
+			ASSIGNMENT-2(COL 333)
+		   Automated Nurse Rostering System
+   			
+PART 1:
+We started by making an empty schedule of nurses for given days and each day that 
+contains 3 alphabets showing the corresponding shift whether it is morning, evening 
+or afternoon. Now, we are proceeding day by day shiftwise and every time we go 
+through a day we start by satisfying every possible constraint i.e. from the set of all 
+possible nurses for the current shift, we are removing all nurses who if assigned the 
+current shift would violate any of the constraints and also making sure that on a 
+particular day the number of nurses in morning should be m, the afternoon should be 
+a and evening should be e. We are doing this by storing the total number of shifts for 
+a particular day already used and then are sorting the remaining nurses according to 
+the number of shifts they have worked in the current week. We are the required 
+number of nurses (assume k nurses to be assigned in the current shift) which have 
+worked for least shifts in the week and then update the counter. If in the sorted order, 
+the kth nurse has already worked for 6 shifts, then assigning it again would violate 
+the constraints, hence we return “NO-SOLUTION”. The runtime of our algorithm is 
+less than 150 sec as we are first removing all the set of nurses which are not 
+possible for that particular slot of that particular day and then are allotting any nurse 
+and for the next slot/day, it will also contribute to our constraint satisfaction.
+
+PART 2: 
+To our previous model, we have to make some updates to accommodate these new 
+soft constraints. We have considered that senior nurses are indexed from 0 to S-1. 
+So, while iterating any slot of any day we will now have to see which nurse to allot it 
+and if possible i.e. if in set of nurses there is any senior nurse and the slot is morning 
+or evening we are going to give it to a senior nurse. Also, initially we are prioritising 
+the afternoon slots to non-senior nurses and morning and evening shifts to senior 
+nurses so as to maximise the soft constraints. If it is giving NO SOLUTION we are 
+going back to our previous part and then run an algorithm again where morning and 
+evening shifts are prioritised to the senior nurses (in increasing order of already 
+assigned shifts as done in part 1) but in afternoon shift, no such demarcation is 
+present between senior and non-senior nurse. We are just assigning this shift as 
+done in part 1. To optimize our code to run it we have to make sure that we fail fast. 
+So, if all constraints are satisfied we are always going to give the same nurse slots 
+that are coming. And, also we are going to assign the most constrained slots first. 
+This way we can form an optimized function for assigning nurses to hospital shifts 
+using the algorithm. As an output, we have to dump our output to the JSON file.
+
+
